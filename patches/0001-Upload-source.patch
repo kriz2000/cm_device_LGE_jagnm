@@ -1,0 +1,46 @@
+From 0ec22ff682da7b2fba1b6cd4004d22bebf0ab4f3 Mon Sep 17 00:00:00 2001
+Message-Id: <0ec22ff682da7b2fba1b6cd4004d22bebf0ab4f3.1433753210.git.kriz2000@wp.pl>
+From: kriz2000 <kriz2000@wp.pl>
+Date: Mon, 8 Jun 2015 10:34:54 +0200
+Subject: [PATCH] Upload source
+
+---
+ BoardConfig.mk | 13 +++++++++----
+ vendorsetup.sh |  1 +
+ 2 files changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/BoardConfig.mk b/BoardConfig.mk
+index 4bb866a..81e500d 100644
+--- a/BoardConfig.mk
++++ b/BoardConfig.mk
+@@ -20,11 +20,16 @@ BOARD_KERNEL_BASE := 0x00000000
+ BOARD_KERNEL_PAGESIZE := 2048
+ 
+ # fix this up by examining /proc/mtd on a running device
+-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x105c0000
+-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x105c0000
+-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
+-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
++BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
++BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
++BOARD_VOLD_MAX_PARTITIONS := 40
++TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
++BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
++BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
++BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1832910848
++BOARD_USERDATAIMAGE_PARTITION_SIZE := 4434952192
+ BOARD_FLASH_BLOCK_SIZE := 131072
++BOARD_HAS_LARGE_FILESYSTEM := true
+ 
+ TARGET_PREBUILT_KERNEL := device/LGE/jagnm/kernel
+ 
+diff --git a/vendorsetup.sh b/vendorsetup.sh
+new file mode 100644
+index 0000000..eeebba2
+--- /dev/null
++++ b/vendorsetup.sh
+@@ -0,0 +1 @@
++add_lunch_combo cm_jagnm-userdebug
+-- 
+1.9.1
+
